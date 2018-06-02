@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="bootdo" />
+        <module name="wgc" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="bootdo" target="1.8" />
+      <module name="wgc" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
