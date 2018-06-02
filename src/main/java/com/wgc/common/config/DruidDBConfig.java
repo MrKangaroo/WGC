@@ -14,9 +14,6 @@ import org.springframework.context.annotation.Primary;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
-/**
- * Created by PrimaryKey on 17/2/4.
- */
 @SuppressWarnings("AlibabaRemoveCommentedCode")
 @Configuration
 public class DruidDBConfig {

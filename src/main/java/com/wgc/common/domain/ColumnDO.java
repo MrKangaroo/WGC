@@ -2,8 +2,6 @@ package com.wgc.common.domain;
 
 /**
  * 列的属性
- * 
- * 
  */
 public class ColumnDO {
 	// 列名

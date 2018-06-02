@@ -8,10 +8,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * @author gaoyuzhe
- * @date 2017/12/14.
- */
 @Configuration
 public class DateConverConfig {
     @Bean

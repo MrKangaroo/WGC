@@ -29,20 +29,18 @@ public class GenUtils {
 
     public static List<String> getTemplates() {
         List<String> templates = new ArrayList<String>();
-        templates.add("templates/common/generator/domain.java.vm");
-        templates.add("templates/common/generator/Dao.java.vm");
-        //templates.add("templates/common/generator/Mapper.java.vm");
-        templates.add("templates/common/generator/Mapper.xml.vm");
-        templates.add("templates/common/generator/Service.java.vm");
-        templates.add("templates/common/generator/ServiceImpl.java.vm");
-        templates.add("templates/common/generator/Controller.java.vm");
-        templates.add("templates/common/generator/list.html.vm");
-        templates.add("templates/common/generator/add.html.vm");
-        templates.add("templates/common/generator/edit.html.vm");
-        templates.add("templates/common/generator/list.js.vm");
-        templates.add("templates/common/generator/add.js.vm");
-        templates.add("templates/common/generator/edit.js.vm");
-        //templates.add("templates/common/generator/menu.sql.vm");
+        templates.add("templates/generator/domain.java.vm");
+        templates.add("templates/generator/Dao.java.vm");
+        templates.add("templates/generator/Mapper.xml.vm");
+        templates.add("templates/generator/Service.java.vm");
+        templates.add("templates/generator/ServiceImpl.java.vm");
+        templates.add("templates/generator/Controller.java.vm");
+        templates.add("templates/generator/list.html.vm");
+        templates.add("templates/generator/add.html.vm");
+        templates.add("templates/generator/edit.html.vm");
+        templates.add("templates/generator/list.js.vm");
+        templates.add("templates/generator/add.js.vm");
+        templates.add("templates/generator/edit.js.vm");
         return templates;
     }
 
@@ -174,7 +172,6 @@ public class GenUtils {
      */
     public static String getFileName(String template, String classname, String className, String packageName) {
         String packagePath = "main" + File.separator + "java" + File.separator;
-        //String modulesname=config.getString("packageName");
         if (StringUtils.isNotBlank(packageName)) {
             packagePath += packageName.replace(".", File.separator) + File.separator;
         }
@@ -186,10 +183,6 @@ public class GenUtils {
         if (template.contains("Dao.java.vm")) {
             return packagePath + "dao" + File.separator + className + "Dao.java";
         }
-
-//		if(template.contains("Mapper.java.vm")){
-//			return packagePath + "dao" + File.separator + className + "Mapper.java";
-//		}
 
         if (template.contains("Service.java.vm")) {
             return packagePath + "service" + File.separator + className + "Service.java";
@@ -224,7 +217,6 @@ public class GenUtils {
         if (template.contains("list.js.vm")) {
             return "main" + File.separator + "resources" + File.separator + "static" + File.separator + "js" + File.separator
                     + "appjs" + File.separator + packageName + File.separator + classname + File.separator + classname + ".js";
-            //		+ "modules" + File.separator + "generator" + File.separator + className.toLowerCase() + ".js";
         }
         if (template.contains("add.js.vm")) {
             return "main" + File.separator + "resources" + File.separator + "static" + File.separator + "js" + File.separator
@@ -234,11 +226,6 @@ public class GenUtils {
             return "main" + File.separator + "resources" + File.separator + "static" + File.separator + "js" + File.separator
                     + "appjs" + File.separator + packageName + File.separator + classname + File.separator + "edit.js";
         }
-
-//		if(template.contains("menu.sql.vm")){
-//			return className.toLowerCase() + "_menu.sql";
-//		}
-
         return null;
     }
 }

@@ -3,7 +3,7 @@ package com.wgc.common.controller;
 import com.alibaba.fastjson.JSON;
 import com.wgc.common.service.GeneratorService;
 import com.wgc.common.utils.GenUtils;
-import com.wgc.common.utils.R;
+import com.wgc.common.utils.SystemResponse;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
@@ -80,7 +80,7 @@ public class GeneratorController {
 
 	@ResponseBody
 	@PostMapping("/update")
-	R update(@RequestParam Map<String, Object> map) {
+	SystemResponse update(@RequestParam Map<String, Object> map) {
 		try {
 			PropertiesConfiguration conf = new PropertiesConfiguration("generator.properties");
 			conf.setProperty("author", map.get("author"));
@@ -90,8 +90,8 @@ public class GeneratorController {
 			conf.setProperty("tablePrefix", map.get("tablePrefix"));
 			conf.save();
 		} catch (ConfigurationException e) {
-			return R.error("保存配置文件出错");
+			return SystemResponse.error("保存配置文件出错");
 		}
-		return R.ok();
+		return SystemResponse.ok();
 	}
 }
