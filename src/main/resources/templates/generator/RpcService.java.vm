@@ -1,0 +1,27 @@
+package com.mryx.grampus.pop.api.rpc.service.kitchen;
+
+import com.mryx.grampus.pop.api.bean.common.SystemResponse;
+import com.mryx.grampus.pop.api.request.kitchen.*;
+
+/**
+ * 中央厨房表
+ *
+ * @author daisy
+ * @email
+ * @date 2018-06-06 10:50:51
+ */
+public interface IPop${className}RpcService {
+    SystemResponse fetch${className}(Fetch${className}Request fetch${className}Request);
+
+    SystemResponse fetch${className}ListPage(Fetch${className}ListRequest fetch${className}ListRequest);
+
+    SystemResponse fetch${className}ListCount(Fetch${className}ListRequest fetch${className}ListRequest);
+
+    SystemResponse create${className}(CreateOrModify${className}Request createOrModify${className}Request);
+
+    SystemResponse update${className}(CreateOrModify${className}Request createOrModify${className}Request);
+
+    SystemResponse createOrUpdate${className}(CreateOrModify${className}Request createOrModify${className}Request);
+
+    SystemResponse delete${className}(Delete${className}Request delete${className}Request);
+}

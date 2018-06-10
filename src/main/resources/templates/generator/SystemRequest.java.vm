@@ -1,0 +1,14 @@
+package ${package}.domain;
+
+import java.util.List;
+import java.io.Serializable;
+import java.util.Date;
+
+/**
+ * ${comments}
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+public class ${className}SystemResponse extends SystemResponse {
+}

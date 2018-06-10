@@ -1,0 +1,32 @@
+package com.mryx.grampus.pop.api.request.kitchen;
+
+
+import com.mryx.grampus.pop.api.bean.common.PageRequest;
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+public class Fetch${className}ListRequest extends PageRequest {
+    private Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public Fetch${className}ListRequest setId(Integer id) {
+        this.id = id;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Fetch${className}ListRequest{");
+        sb.append("id=").append(id);
+        sb.append('}');
+        return sb.toString();
+    }
+}

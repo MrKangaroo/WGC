@@ -1,0 +1,97 @@
+package com.mryx.grampus.pop.service.rpc.impl.kitchen;
+
+import com.mryx.grampus.pop.api.bean.common.Page;
+import com.mryx.grampus.pop.api.bean.common.SystemResponse;
+import com.mryx.grampus.pop.api.bean.kitchen.${className}DO;
+import com.mryx.grampus.pop.api.request.kitchen.CreateOrModify${className}Request;
+import com.mryx.grampus.pop.api.request.kitchen.Delete${className}Request;
+import com.mryx.grampus.pop.api.request.kitchen.Fetch${className}ListRequest;
+import com.mryx.grampus.pop.api.request.kitchen.Fetch${className}Request;
+import com.mryx.grampus.pop.api.rpc.service.kitchen.IPop${className}RpcService;
+import com.mryx.grampus.pop.bean.dto.${className}Dto;
+import com.mryx.grampus.pop.bean.query.${className}Query;
+import com.mryx.grampus.pop.service.kitchen.I${className}Service;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+
+@Service("${className}RpcService")
+public class Pop${className}RpcServiceImpl implements IPop${className}RpcService {
+    @Resource
+    private I${className}Service ${className}Service;
+
+    @Override
+    public SystemResponse<${className}DO> fetch${className}(Fetch${className}Request request){
+        SystemResponse systemResponse = new SystemResponse();
+        systemResponse.setResponseData(${className}Service.fetch${className}(request.getId()));
+        return systemResponse;
+    }
+
+    @Override
+    public SystemResponse fetch${className}ListPage(Fetch${className}ListRequest request){
+        SystemResponse systemResponse = new SystemResponse();
+            ${className}Query ${className}Query = new ${className}Query();
+        int offset = 0;
+            ${className}Query.setOffset(offset = ((request.getPageNum() - 1) * request.getPageSize()) < 0 ? 0 : offset);
+            ${className}Query.setPageSize(request.getPageSize());
+
+        List<${className}Dto> ${className}DOList = ${className}Service.fetch${className}ListPage(${className}Query);
+
+        Page<${className}Dto> page = new Page();
+        page.setPageNum(request.getPageNum());
+        page.setPageSize(request.getPageSize());
+        page.setResult(${className}DOList);
+        int count = ${className}Service.fetch${className}ListCount(${className}Query);
+        page.setTotal(count);
+
+        systemResponse.setResponseData(page);
+        return systemResponse;
+
+    }
+
+    @Override
+    public SystemResponse fetch${className}ListCount(Fetch${className}ListRequest request){
+        SystemResponse systemResponse = new SystemResponse();
+            ${className}Query ${className}Query = new ${className}Query();
+        systemResponse.setResponseData(${className}Service.fetch${className}ListCount(${className}Query));
+        return systemResponse;
+    }
+
+    @Override
+    public SystemResponse create${className}(CreateOrModify${className}Request request){
+        SystemResponse systemResponse = new SystemResponse();
+            ${className}DO ${className}DO = Pop${className}Conerter.convert(request);
+        systemResponse.setResponseData(${className}Service.create${className}(${className}DO));
+        return systemResponse;
+    }
+
+    @Override
+    public SystemResponse update${className}(CreateOrModify${className}Request request){
+        SystemResponse systemResponse = new SystemResponse();
+            ${className}DO ${className}DO = Pop${className}Conerter.convert(request);
+        systemResponse.setResponseData(${className}Service.update${className}(${className}DO));
+        return systemResponse;
+    }
+
+    @Override
+    public SystemResponse delete${className}(Delete${className}Request request){
+        SystemResponse systemResponse = new SystemResponse();
+        systemResponse.setResponseData(${className}Service.delete${className}(request.getId()));
+        return systemResponse;
+    }
+
+    @Override
+    public SystemResponse createOrUpdateKitchen(CreateOrModify${className}Request request) {
+        SystemResponse systemResponse = new SystemResponse();
+            ${className}DO centerKitchenDO = Pop${className}Conerter.convert(request);
+        if(${className}DO.getId() != null){
+            systemResponse.setResponseData(${className}Service.update${className}(${className}DO));
+        }else{
+            systemResponse.setResponseData(${className}Service.create${className}(${className}DO));
+        }
+        return systemResponse;
+    }
+}

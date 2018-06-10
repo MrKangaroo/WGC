@@ -13,20 +13,20 @@ import org.apache.ibatis.annotations.Mapper;
  * @email ${email}
  * @date ${datetime}
  */
-@Mapper
+@Repository
 public interface ${className}Dao {
 
-	${className}DO get(${pk.attrType} ${pk.attrname});
+	${className}Dto selectByPrimaryKey(${pk.attrType} ${pk.attrname});
 	
-	List<${className}DO> list(Map<String,Object> map);
+	List<${className}Dto> selectObjectListPage(${className}Query ${className}Query);
+
+	List<${className}Dto> selectByObjectList(${className}Query ${className}Query);
+
+	int selectObjectListPageTotal(${className}Query ${className}Query);
 	
-	int count(Map<String,Object> map);
+	int insertSelective(${className}DO ${classname});
 	
-	int save(${className}DO ${classname});
+	int updateByPrimaryKeySelective(${className}DO ${classname});
 	
-	int update(${className}DO ${classname});
-	
-	int remove(${pk.attrType} ${pk.columnName});
-	
-	int batchRemove(${pk.attrType}[] ${pk.attrname}s);
+	int deleteByPrimaryKey(${pk.attrType} ${pk.columnName});
 }

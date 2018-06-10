@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mryx.grampus.pop.dao.${className}Dao">
+    <resultMap id="BaseResultMap" type="com.mryx.grampus.pop.bean.dto.${className}Dto" >
+        <id property="id" column="id" jdbcType="INTEGER" />
+        #foreach($column in $columns)
+            #if($column.columnName != 'id')
+                #if($column.columnName.indexof("time") > 0)
+                    <result property="$column.attrname" column="$column.columnName" jdbcType="TIMESTAMP" />
+                #elseif($column.columnName.indexof("flag") > 0 || $column.columnName.indexof("status") > 0)
+                    <result property="$column.attrname" column="$column.columnName" jdbcType="TINYINT" />
+                #else
+                    <result property="$column.attrname" column="$column.columnName" jdbcType="VARCHAR" />
+                #end
+            #end
+        #end
+    </resultMap>
+    <sql id="Base_Column_List">
+        #foreach($column in $columns)`$column.columnName`#if($velocityCount != $columns.size()),#end#end
+    </sql>
+    <sql id="conditions">
+        <if test="id != null "> and id = #{id,jdbcType=INTEGER} </if>
+        #foreach($column in $columns)
+            #if($column.columnName != 'id')
+                #if($column.columnName.indexof("time") > 0)
+                    <if test="$column.attrname != null and $column.attrname != '' "> and $column.columnName = #{$column.attrname,jdbcType=TIMESTAMP} </if>
+                #elseif($column.columnName.indexof("flag") > 0 || $column.columnName.indexof("status") > 0)
+                    <if test="$column.attrname != null and $column.attrname != '' "> and $column.columnName = #{$column.attrname,jdbcType=TINYINT} </if>
+                #else
+                    <if test="$column.attrname != null and $column.attrname != '' "> and $column.columnName = #{$column.attrname,jdbcType=VARCHAR} </if>
+                #end
+            #end
+        #end
+    </sql>
+
+    <!-- 查询（根据主键ID查询） -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM ${tableName}
+        WHERE id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <!--删除：根据主键ID删除-->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM ${tableName}
+        WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <!-- 添加 （匹配有值的字段,不建议使用）-->
+    <insert id="insertSelective" parameterType="com.mryx.grampus.pop.api.bean.kitchen.${className}DO">
+        INSERT INTO ${tableName}
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            #foreach($column in $columns)
+                <if test="$column.attrname != null"> $column.columnName,</if>
+            #end
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id!=null">#{id,jdbcType=INTEGER},</if>
+            #foreach($column in $columns)
+                #if($column.columnName != 'id')
+                    #if($column.columnName.indexof("time") > 0)
+                        <if test="$column.attrname != null">#{$column.attrname,jdbcType=TIMESTAMP},</if>
+                    #elseif($column.columnName.indexof("flag") > 0 || $column.columnName.indexof("status") > 0)
+                        <if test="$column.attrname != null">#{$column.attrname,jdbcType=TINYINT},</if>
+                    #else
+                        <if test="$column.attrname != null">#{$column.attrname,jdbcType=VARCHAR},</if>
+                    #end
+                #end
+            #end
+        </trim>
+    </insert>
+
+    <!-- 根据主键修改输入的值-->
+    <update id="updateByPrimaryKeySelective" parameterType="com.mryx.grampus.pop.api.bean.kitchen.${className}DO">
+        UPDATE ${tableName}
+        <set>
+            #foreach($column in $columns)
+                #if($column.columnName != 'id')
+                    #if($column.columnName.indexof("time") > 0)
+                        <if test="$column.attrname != null">$column.columnName = #{$column.attrname,jdbcType=TIMESTAMP},</if>
+                    #elseif($column.columnName.indexof("flag") > 0 || $column.columnName.indexof("status") > 0)
+                        <if test="$column.attrname != null">$column.columnName = #{$column.attrname,jdbcType=TINYINT},</if>
+                    #else
+                        <if test="$column.attrname != null">$column.columnName = #{$column.attrname,jdbcType=VARCHAR},</if>
+                    #end
+                #end
+            #end
+        </set>
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <!-- 分页查询 -->
+    <select id="selectObjectListPage" resultMap="BaseResultMap" parameterType="com.mryx.grampus.pop.bean.query.${className}Query" useCache="false">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM ${tableName}
+        WHERE 1=1
+        #foreach($column in $columns)
+            #if($column.columnName != 'id')
+                #if($column.columnName.indexof("time") > 0)
+                    <if test="$column.attrname != null and $column.attrname != ''">#{$column.attrname}</if>
+                #end
+            #end
+        #end
+        limit #{offset},#{pageSize}
+    </select>
+
+    <!-- 分页查询总数 -->
+    <select id="selectObjectListPageTotal" resultType="java.lang.Integer" parameterType="com.mryx.grampus.pop.bean.query.${className}Query" useCache="false">
+        SELECT
+        count(*)
+        FROM ${tableName}
+        WHERE 1=1
+        #foreach($column in $columns)
+            #if($column.columnName != 'id')
+                #if($column.columnName.indexof("time") > 0)
+                    <if test="$column.attrname != null and $column.attrname != ''">#{$column.attrname}</if>
+                #end
+            #end
+        #end
+    </select>
+
+    <!-- 按条件查询列表 -->
+    <select id="selectByObjectList" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM ${tableName}
+        WHERE 1=1
+        <include refid="conditions" />
+    </select>
+</mapper>

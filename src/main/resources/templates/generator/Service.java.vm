@@ -12,19 +12,17 @@ import java.util.Map;
  * @email ${email}
  * @date ${datetime}
  */
-public interface ${className}Service {
+public interface I${className}Service {
 	
-	${className}DO get(${pk.attrType} ${pk.attrname});
+	${className}Dto fetch${className}(${pk.attrType} ${pk.attrname});
 	
-	List<${className}DO> list(Map<String, Object> map);
+	List<${className}Dto> fetch${className}ListPage(${className}Query ${className}Query);
 	
-	int count(Map<String, Object> map);
+	int fetch${className}ListCount(${className}Query ${className}Query);
 	
-	int save(${className}DO ${classname});
+	int create${className}(${className}DO ${classname});
 	
-	int update(${className}DO ${classname});
+	int update${className}(${className}DO ${classname});
 	
-	int remove(${pk.attrType} ${pk.attrname});
-	
-	int batchRemove(${pk.attrType}[] ${pk.attrname}s);
+	int delete${className}(${pk.attrType} ${pk.attrname});
 }

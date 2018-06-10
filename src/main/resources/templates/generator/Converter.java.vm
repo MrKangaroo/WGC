@@ -1,0 +1,33 @@
+package com.mryx.grampus.pop.service.rpc.impl.kitchen;
+
+import com.mryx.grampus.pop.api.bean.kitchen.${className}DO;
+import com.mryx.grampus.pop.api.request.kitchen.CreateOrModify${className}Request;
+
+import java.util.Objects;
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+public class ${className}Converter {
+
+    public static ${className}DO convert(CreateOrModify${className}Request createOrModify${className}Request){
+        if(createOrModify${className}Request == null){
+            return null;
+        }
+            ${className}DO ${className}DO = new ${className}DO();
+
+
+        #foreach ($column in $columns)
+            if(Objects.nonNull(createOrModify${className}Request.get${column.attrName}())){
+                    ${className}DO.set${column.attrName}(createOrModify${className}Request.get${column.attrName}());
+            }
+        #end
+
+        return ${className}DO;
+    }
+
+}
