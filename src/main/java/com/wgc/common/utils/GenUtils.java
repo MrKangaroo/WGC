@@ -51,7 +51,7 @@ public class GenUtils {
         templates.add("templates/generator/Query.java.vm");
         templates.add("templates/generator/Dto.java.vm");
         templates.add("templates/generator/Dao.xml.vm");
-        templates.add("templates/generator/Converter.xml.vm");
+        templates.add("templates/generator/Converter.java.vm");
         templates.add("templates/generator/FetchListRequest.java.vm");
         templates.add("templates/generator/FetchRequest.java.vm");
         templates.add("templates/generator/DeleteRequest.java.vm");
@@ -193,37 +193,37 @@ public class GenUtils {
         }
 
         if (template.contains("Domain.java.vm")) {
-            return packagePath + "domain" + File.separator + className + "DO.java";
+            return packagePath + "domain"+ File.separator + className + File.separator + className + "DO.java";
         }
 
         if (template.contains("Dao.java.vm")) {
-            return packagePath + "dao" + File.separator + className + "Dao.java";
+            return packagePath + "dao" + File.separator + className+ File.separator + className + "Dao.java";
         }
         if (template.contains("RpcService.java.vm")) {
-            return packagePath + "service" + File.separator + "I" + className + "RpcService.java";
+            return packagePath + "service" + File.separator + className + File.separator + "I" + className + "RpcService.java";
         }
 
         if (template.contains("RpcServiceImpl.java.vm")) {
-            return packagePath + "service" + File.separator + "impl" + File.separator + className + "RpcServiceImpl.java";
+            return packagePath + "service"+ File.separator + className + File.separator + "impl" + File.separator + className + "RpcServiceImpl.java";
         }
 
         if (template.contains("Service.java.vm")) {
-            return packagePath + "service" + File.separator + "I" + className + "Service.java";
+            return packagePath + "service"+ File.separator + className + File.separator + "I" + className + "Service.java";
         }
 
         if (template.contains("ServiceImpl.java.vm")) {
-            return packagePath + "service" + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
+            return packagePath + "service"+ File.separator + className + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
         }
         if (template.contains("SystemRequest.java.vm")) {
-            return packagePath + "domain" + File.separator + className + "SystemRequest.java";
+            return packagePath + "domain"+ File.separator + className + File.separator + className + "SystemRequest.java";
         }
 
         if (template.contains("SystemResponse.java.vm")) {
-            return packagePath + "domain" + File.separator + className + "SystemResponse.java";
+            return packagePath + "domain"+ File.separator + className + File.separator + className + "SystemResponse.java";
         }
 
         if (template.contains("Controller.java.vm")) {
-            return packagePath + "controller" + File.separator + className + "Controller.java";
+            return packagePath + "controller"+ File.separator + className + File.separator + className + "Controller.java";
         }
 
         if (template.contains("Query.java.vm")) {
@@ -233,7 +233,7 @@ public class GenUtils {
             return packagePath + "dto"+ File.separator + className + File.separator + className + "Dto.java";
         }
         if (template.contains("Dao.xml.vm")) {
-            return packagePath + "Dao"+ File.separator + className + File.separator + className + "Dao.java";
+            return packagePath + "Dao"+ File.separator + className + File.separator + className + "Dao.xml";
         }
         if (template.contains("Converter.java.vm")) {
             return packagePath + "converter" + File.separator + className+ File.separator + className + "Converter.java";

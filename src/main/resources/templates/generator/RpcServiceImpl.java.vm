@@ -45,7 +45,8 @@ public class Pop${className}RpcServiceImpl implements IPop${className}RpcService
         page.setPageSize(request.getPageSize());
         page.setResult(${className}DOList);
         int count = ${className}Service.fetch${className}ListCount(${className}Query);
-        page.setTotal(count);
+        int totalPage = (count % request.getPageSize() == 0) ? count / request.getPageSize() : count / request.getPageSize() + 1;
+        page.setTotal(totalPage);
 
         systemResponse.setResponseData(page);
         return systemResponse;
@@ -84,9 +85,9 @@ public class Pop${className}RpcServiceImpl implements IPop${className}RpcService
     }
 
     @Override
-    public SystemResponse createOrUpdateKitchen(CreateOrModify${className}Request request) {
+    public SystemResponse createOrUpdate${className}(CreateOrModify${className}Request request) {
         SystemResponse systemResponse = new SystemResponse();
-            ${className}DO centerKitchenDO = Pop${className}Conerter.convert(request);
+            ${className}DO ${className}DO = Pop${className}Conerter.convert(request);
         if(${className}DO.getId() != null){
             systemResponse.setResponseData(${className}Service.update${className}(${className}DO));
         }else{

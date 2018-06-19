@@ -17,7 +17,7 @@ public class Delete${className}Request extends SystemRequest {
         return id;
     }
 
-    public Fetch${className}Request setId(Integer id) {
+    public Delete${className}Request setId(Integer id) {
         this.id = id;
         return this;
     }
